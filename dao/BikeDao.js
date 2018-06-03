@@ -1,6 +1,7 @@
 const connectionFactory = require('../services/connectionFactory')
 const knex = connectionFactory.knex;
 const priceHelper = require(`../helper/priceHelper`)
+const keyConfig = require('../config/keysConfig')
 
 module.exports = {
     getDockless() {
@@ -28,6 +29,7 @@ module.exports = {
     finishedRun(id_user, id_dockless, date_end_running) {
         return knex.select(`date_start_running`, `id_bike`).from(`runningsController`)
             .where({ id_user, date_end_running: null }).then(runningIdAffected => {
+
                 const date_start_running = runningIdAffected[0].date_start_running;
                 const id_bike = runningIdAffected[0].id_bike;
                 const runTime = priceHelper.runTime(date_start_running, date_end_running)
@@ -47,6 +49,10 @@ module.exports = {
                                     .update({
                                         running: "0",
                                         id_dockless
+                                    }).then(result => {
+                                        return knex('runningsController')
+                                            .where({ id_user }).orderBy(`date_end_running`, `desc`).limit(1)
+
                                     })
                             })
                     })

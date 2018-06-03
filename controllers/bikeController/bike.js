@@ -122,7 +122,8 @@ exports.finishedRun = function (req, res) {
         winston.info(`finishedRun ->   - *Successfuully new runs is finished*`)
         return res.status(201).json({
             status: 201,
-            message: "Successfuully new runs is finished "
+            message: "Successfuully new run was finished ",
+            data: result
         })
     }).catch(error => {
         winston.error(`finishedRun ->   *Internal Server error - ${error}*`)

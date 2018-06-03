@@ -1,22 +1,20 @@
-# Project Title
-ubikeAPI
+# ubikeAPI
+
 
 ### Prerequisites
 
-- node
-- npm 
+- node v9.2.0
+- npm 5.5.1
 
  
 ### Installing dependencies
 
 - npm install
 
-## run With
+## to run app
 - npm run start
 
-
-
-## Versioning
+## Version
 - 1.0
 
 ## Authors

@@ -12,5 +12,5 @@ exports.runTime = function (dateStart, dateFinished) {
     const diferenceBySeconds = (new Date(dateStart).getTime() - new Date(dateFinished).getTime()) / 1000;
     const diferenceByMinutes = diferenceBySeconds / 60;
 
-    return Math.abs(Math.round(diferenceByMinutes)) + " Minutos"
+    return Math.abs(Math.round(diferenceByMinutes)) + " minuto(s)"
 }

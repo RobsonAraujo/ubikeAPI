@@ -28,8 +28,6 @@ module.exports = {
     finishedRun(id_user, id_dockless, date_end_running) {
         return knex.select(`date_start_running`, `id_bike`).from(`runningsController`)
             .where({ id_user, date_end_running: null }).then(runningIdAffected => {
-
-
                 const date_start_running = runningIdAffected[0].date_start_running;
                 const id_bike = runningIdAffected[0].id_bike;
                 const runTime = priceHelper.runTime(date_start_running, date_end_running)

@@ -108,9 +108,9 @@ exports.startRun = function (req, res) {
 
 exports.finishedRun = function (req, res) {
 
-    const { userId, bikeId, dockelessId, runningId } = req.body;
+    const { userId, docklessId } = req.body;
 
-    if (!userId || !bikeId || !dockelessId || !runningId) {
+    if (!userId || !docklessId) {
         winston.error('finishedRun -> body -  *Bad Request - Missing parameters*')
         return res.status(400).json({
             status: 400,
@@ -118,7 +118,7 @@ exports.finishedRun = function (req, res) {
         })
     }
 
-    return bikeDao.finishedRun(runningId, userId, bikeId, dockelessId, new Date()).then(result => {
+    return bikeDao.finishedRun(userId, docklessId, new Date()).then(result => {
         winston.info(`finishedRun ->   - *Successfuully new runs is finished*`)
         return res.status(201).json({
             status: 201,

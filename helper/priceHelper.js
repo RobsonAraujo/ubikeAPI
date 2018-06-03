@@ -3,7 +3,7 @@ exports.calculatePrice = function (dateStart, dateFinished) {
     const diferenceBySeconds = (new Date(dateStart).getTime() - new Date(dateFinished).getTime()) / 1000;
     const diferenceByMinutes = diferenceBySeconds / 60;
 
-    return diferenceByMinutes * 0, 05
+    return diferenceByMinutes * 0,05
 
 }
 

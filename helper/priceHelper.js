@@ -3,7 +3,7 @@ exports.calculatePrice = function (dateStart, dateFinished) {
     const diferenceBySeconds = (new Date(dateStart).getTime() - new Date(dateFinished).getTime()) / 1000;
     const diferenceByMinutes = diferenceBySeconds / 60;
 
-    return Math.abs(diferenceByMinutes * 0.016).toFixed(3)
+    return Math.abs(diferenceByMinutes * 0.016).toFixed(2)
 
 }
 
@@ -12,5 +12,5 @@ exports.runTime = function (dateStart, dateFinished) {
     const diferenceBySeconds = (new Date(dateStart).getTime() - new Date(dateFinished).getTime()) / 1000;
     const diferenceByMinutes = diferenceBySeconds / 60;
 
-    return Math.abs(Math.round(diferenceByMinutes)) + " minutes"
+    return Math.abs(Math.round(diferenceByMinutes)) + " Minutos"
 }

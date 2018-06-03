@@ -3,4 +3,12 @@ module.exports = {
     DB_HOST: process.env.DB_HOST || 'sql10.freemysqlhosting.net',
     DB_USER: process.env.DB_USER || 'sql10241171',
     DB_PASSWORD: process.env.DB_PASSWORD || 'yMMLaQhkeA'
-}
+} 
+
+/*
+module.exports = {
+    DB_NAME: process.env.DB_NAME || 'hackUberUbike',
+    DB_HOST: process.env.DB_HOST || '127.0.0.1',
+    DB_USER: process.env.DB_USER || 'root',
+    DB_PASSWORD: process.env.DB_PASSWORD || ''
+}*/

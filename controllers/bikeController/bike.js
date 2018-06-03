@@ -25,8 +25,8 @@ exports.docklessByDistancie = function (req, res) {
 
             const checkDockless = () => {
                 return Promise.all(result.map(bike => {
-                    const googleEndpoint = `https://maps.googleapis.com/maps/api/distancematrix/json?mode=${mode}&origins=${userAddress}&destinations=${bike.address}&key=${keyConfig.googleDistanceMatrixApi}`
-                    return axios(googleEndpoint).then(estimativeGoogle => {
+                    let googleEndpoint = `https://maps.googleapis.com/maps/api/distancematrix/json?mode=${mode}&origins=${encodeURIComponent(userAddress)}&destinations=${encodeURIComponent(bike.address)}&key=${keyConfig.googleDistanceMatrixApi}`
+                    return axios.get(googleEndpoint).then(estimativeGoogle => {
                         if (estimativeGoogle.data.rows[0].elements[0].status != "OK") {
                             return null
                         } else {

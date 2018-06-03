@@ -27,17 +27,25 @@ exports.docklessByDistancie = function (req, res) {
                 return Promise.all(result.map(bike => {
                     const googleEndpoint = `https://maps.googleapis.com/maps/api/distancematrix/json?mode=${mode}&origins=${userAddress}&destinations=${bike.address}&key=${keyConfig.googleDistanceMatrixApi}`
                     return axios(googleEndpoint).then(estimativeGoogle => {
-                        const estimativeInSeconds = estimativeGoogle.data.rows[0].elements[0].duration.value;
-                        const targetTimeInSeconds = targetTime * 60;
-                        // chang property name
-                        estimativeGoogle.data.rows[0].elements[0].duration.estimateTime = estimativeGoogle.data.rows[0].elements[0].duration.text
-
-                        if (estimativeInSeconds < targetTimeInSeconds && bike.reserved != 1 && bike.running != 1) {
-                            bike.estimateTime = estimativeGoogle.data.rows[0].elements[0].duration.estimateTime
-                            return bike
-                        } else {
+                        if (estimativeGoogle.data.rows[0].elements[0].status != "OK") {
                             return null
+                        } else {
+
+                            const estimativeInSeconds = estimativeGoogle.data.rows[0].elements[0].duration.value;
+                            const targetTimeInSeconds = targetTime * 60;
+
+                            // chang property name
+                            estimativeGoogle.data.rows[0].elements[0].duration.estimateTime = estimativeGoogle.data.rows[0].elements[0].duration.text
+
+                            if (estimativeInSeconds < targetTimeInSeconds && bike.reserved != 1 && bike.running != 1) {
+                                bike.estimateTime = estimativeGoogle.data.rows[0].elements[0].duration.estimateTime
+                                return bike
+                            } else {
+                                return null
+                            }
+
                         }
+
                     })
                 }))
             }
@@ -72,9 +80,9 @@ exports.docklessByDistancie = function (req, res) {
 
 exports.startRun = function (req, res) {
 
-    const { userId, bikeId, dockelessId } = req.body;
+    const { userId, dockelessId } = req.body;
 
-    if (!userId || !bikeId || !dockelessId) {
+    if (!userId || !dockelessId) {
         winston.error('startRun -> body -  *Bad Request - Missing parameters*')
         return res.status(400).json({
             status: 400,
@@ -82,7 +90,7 @@ exports.startRun = function (req, res) {
         })
     }
 
-    return bikeDao.startRun(userId, bikeId, dockelessId, new Date()).then(result => {
+    return bikeDao.startRun(userId, dockelessId, new Date()).then(result => {
         winston.info(`startRun -> create new run - *Successfuully new runs is created with id ${result}*`)
         return res.status(201).json({
             status: 201,

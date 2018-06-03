@@ -6,13 +6,24 @@ module.exports = {
     getDockless() {
         return knex('dockless')
     },
-    startRun(id_user, id_bike, id_dockless, date_start_running) {
-        return knex('runningsController')
-            .insert({ id_user, id_bike, id_dockless, date_start_running }).then(result => {
-                return knex('dockless')
-                    .where('id', id_dockless)
-                    .decrement('bikes_available', 1)
+    startRun(id_user, id_dockless, date_start_running) {
+
+        return knex.select(`id_bike`).from(`bikes`)
+            .where({ id_dockless, running: "0" }).limit(1).then(result => {
+                const id_bike = result[0].id_bike
+                return knex('runningsController')
+                    .insert({ id_user, id_dockless, id_bike, date_start_running }).then(result => {
+                        return knex('bikes')
+                            .where('id_bike', id_bike)
+                            .update('running', '1').then(result => {
+                                return knex('dockless')
+                                    .where('id', id_dockless)
+                                    .decrement('bikes_available', 1)
+                            })
+
+                    })
             })
+
     },
 
     finishedRun(id_running, id_user, id_bike, id_dockless, date_end_running) {

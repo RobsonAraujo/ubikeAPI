@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const logger = require('../services/logger')
 const auth = require('../middleware/auth')()
 const routes = require('../routes/routesV1')
-
+const cors = require('cors')
 
 module.exports = function () {
 
@@ -17,6 +17,9 @@ module.exports = function () {
   app.use(bodyParser.json());
   app.use(auth.initialize());
   app.use('/api/v1', routes);
+  app.use(cors());
+
+
 
 
   app.use(

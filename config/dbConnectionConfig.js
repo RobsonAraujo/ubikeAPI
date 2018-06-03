@@ -1,6 +1,6 @@
 module.exports = {
-    DB_NAME: process.env.DB_NAME || 'hackuberubike',
-    DB_HOST: process.env.DB_HOST || 'ubike.mysql.database.azure.com',
-    DB_USER: process.env.DB_USER || 'ubike@ubike',
-    DB_PASSWORD: process.env.DB_PASSWORD || 'Uberbike123'
+    DB_NAME: process.env.DB_NAME || 'sql10241171',
+    DB_HOST: process.env.DB_HOST || 'sql10.freemysqlhosting.net',
+    DB_USER: process.env.DB_USER || 'sql10241171',
+    DB_PASSWORD: process.env.DB_PASSWORD || 'yMMLaQhkeA'
 }

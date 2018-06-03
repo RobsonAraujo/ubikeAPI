@@ -15,6 +15,15 @@ router.post('/example', authMiddleware.authenticate(), controllers.exampleContro
 router.post('/login', controllers.userController.login);
 router.post('/register', controllers.userController.register);
 
+// BIKE LOCATION
+router.get('/bikeDistancie/:userAddress/:mode?/:targetDistancie?', controllers.bikeController.bikesByDistancie)
+
+
+// PAYMENT
+
+
+
+
 
 
 

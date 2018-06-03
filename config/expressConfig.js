@@ -39,7 +39,7 @@ module.exports = function () {
   app.use(function (req, res, next) {
     res.status(404).json({
       status: 404,
-      message: "Endepoint not exists"
+      message: "Endepoint not existent"
     })
   });
 

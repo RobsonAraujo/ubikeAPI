@@ -16,8 +16,15 @@ router.post('/login', controllers.userController.login);
 router.post('/register', controllers.userController.register);
 
 // BIKE LOCATION
-router.get('/bikeDistancie/:userAddress/:mode?/:targetDistancie?', controllers.bikeController.bikesByDistancie)
+router.get('/docklessByDistancie/:userAddress/:mode?/:targetDistancie?', controllers.bikeController.docklessByDistancie)
+router.post('/startRun', controllers.bikeController.startRun)
+router.post('/finishedRun', controllers.bikeController.finishedRun)
 
+// 
+
+
+
+router.post('')
 
 // PAYMENT
 

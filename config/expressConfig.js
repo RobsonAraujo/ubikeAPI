@@ -17,6 +17,11 @@ module.exports = function () {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(auth.initialize());
+  app.use('/api/v1', routes);
+  
+
+
+
 
   app.use(
     morgan('common', {
